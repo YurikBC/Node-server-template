@@ -1,6 +1,6 @@
 const express = require('express');
 const webpack = require("webpack");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const livereload = require('livereload');
 const path = require('path');
 const app = express();
@@ -29,7 +29,7 @@ compiler.watch({
     }
 }, () => {});
 
-compiler.run(() => {})
+compiler.run(() => {});
 
 
 // server run
