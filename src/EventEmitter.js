@@ -4,12 +4,6 @@ class EventEmitter {
     };
 
     emit(eventName, data) {
-        //const event = this.address[eventName];
-        // if( event ) {
-        //     event.forEach(fn => {
-        //         fn.call(null, data);
-        //     });
-        // }
         ( this.address[eventName] || [] ).forEach(fn => {
             fn.call(null, data);
         });

@@ -20,10 +20,6 @@ function onclick() {
     Actor.send(second_address, ["logTotal"]);
     Actor.send(second_address, ["incrementBy", { number: 20 }]);
     Actor.send(second_address, ["logTotal"]);
-
-    console.log('results:');
-    Actor.send(first_address, ["logTotal"]);
-    Actor.send(second_address, ["logTotal"]);
 }
 
 document.addEventListener("DOMContentLoaded", ready);
