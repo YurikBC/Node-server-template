@@ -12,6 +12,14 @@ const compiler = webpack({
         path: path.join(__dirname, "/public"),
         filename: 'app.js'
     },
+    module: {
+        rules: [
+            {
+                test: /\.html$/,
+                use: 'raw-loader'
+            }
+        ]
+    },
     plugins: [
         new CopyWebpackPlugin([
             {from: './*.html', to: path.join(__dirname, "/public")},
@@ -31,12 +39,12 @@ compiler.watch({
 
 compiler.run(() => {});
 
-
 // server run
-app.get('/', function response(req, res) {
-    app.use(express.static('public'));
+app.use(express.static('public'));
+app.use(function response(req, res) {
     res.sendFile(path.join(__dirname, '/index.html'))
 })
+
 
 // hot reloader
 var server = livereload.createServer({});

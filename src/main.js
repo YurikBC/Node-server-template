@@ -1,25 +1,14 @@
 import Actor from './Actor';
-import Counter  from './Counter';
-import Hello from './Hello';
+import routerActor from './actors/routerActor';
+import renderActor from './actors/renderActor';
+import routes from './router/routerConfig'
 
-const first_address = Actor.start(Counter);
-const second_address = Actor.start(Hello);
+document.addEventListener('DOMContentLoaded', () => {
+    Actor.start(renderActor);
+    Actor.start(routerActor);
+});
 
-function ready () {
-    let el = document.getElementById('button');
-    el.addEventListener('click', onclick);
-}
+setTimeout(() => {
+    Actor.send('routerActor', ['go', routes[2]])
+}, 3000);
 
-function onclick() {
-    console.log('to first_address:');
-    Actor.send(first_address, ["logTotal"]);
-    Actor.send(first_address, ["incrementBy", { number: 2 }]);
-    Actor.send(first_address, ["logTotal"]);
-
-    console.log('to second_address:');
-    Actor.send(second_address, ["logTotal"]);
-    Actor.send(second_address, ["incrementBy", { number: 20 }]);
-    Actor.send(second_address, ["logTotal"]);
-}
-
-document.addEventListener("DOMContentLoaded", ready);

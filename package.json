@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.4.2",
+    "html-loader": "^0.5.5",
+    "raw-loader": "^0.5.1",
     "webpack": "^4.0.1"
   }
 }
