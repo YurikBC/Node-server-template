@@ -1,22 +1,29 @@
-import templateFirst from '../../view/firstPageTemplate.html'
-import templateSecond from '../../view/secondPageTemplate.html';
-import templateThird from '../../view/thirdPageTemplate.html';
+import templateFirst from '../views/firstPageTemplate.html'
+import templateSecond from '../views/secondPageTemplate.html';
+import templateThird from '../views/thirdPageTemplate.html';
+
+import firstPageActor from '../actors/firstPage/firstPage'
+import secondPageActor from '../actors/secondPage/secondPage'
+import thirdPageActor from '../actors/thirdPage/thirdPage'
 
 const routes = [
     {
         name: 'Main',
-        adress: '',
-        template: templateFirst
+        address: '1',
+        template: templateFirst,
+        controller: firstPageActor
     },
     {
         name: 'SecondPage',
-        adress: '#2',
-        template: templateSecond
+        address: '2',
+        template: templateSecond,
+        controller: secondPageActor
     },
     {
         name: 'thirdPage',
-        adress: '#3',
-        template: templateThird
+        address: '3',
+        template: templateThird,
+        controller: thirdPageActor
     }
 ]
 

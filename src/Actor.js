@@ -2,7 +2,16 @@ import EventEmitter from './EventEmitter';
 
 const eventEmitter = new EventEmitter();
 
-let actorAdresses = {}
+let actoraddresses = {}
+
+
+function getAddress (target) {
+    let address = target
+    if (typeof target === 'string') {
+        address = actoraddresses[target]
+    }
+    return address
+}
 
 const Actor = {
     start (behavior) {
@@ -13,17 +22,17 @@ const Actor = {
             state = behavior[method](state, message) || state;
         });
 
-        actorAdresses[behavior.name] = address
+        actoraddresses[behavior.name] = address;
 
         return address;
     },
 
     send (target, message) {
-        let adress = target
-        if (typeof target === 'string') {
-            adress = actorAdresses[target]
-        }
-        eventEmitter.emit(adress, message);
+        eventEmitter.emit(getAddress(target), message);
+    },
+
+    end (target) {
+        eventEmitter.off(getAddress(target));
     }
 };
 

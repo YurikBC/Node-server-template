@@ -1,10 +1,14 @@
 let renderActor = {
     name: 'renderActor',
     init () {
-        return document.getElementById('a-app')
+        let state = {}
+        state.mainEl = document.getElementById('a-app')
+        return state
     },
-    paint (state, [currentRoute]) {
-        state.innerHTML = currentRoute.template
+    paint (state, currentRoute) {
+        if (state.mainEl) {
+            state.mainEl.innerHTML = currentRoute.template
+        }
     }
 };
 

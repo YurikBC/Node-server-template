@@ -3,25 +3,21 @@ class EventEmitter {
         this.address = {};
     };
 
-    emit(eventName, data) {
+    emit (eventName, data) {
         ( this.address[eventName] || [] ).forEach(fn => {
             fn.call(null, data);
         });
     };
 
-    on(eventName, fn) {
+    on (eventName, fn) {
         if(!this.address[eventName]) {
             this.address[eventName] = [];
         }
         this.address[eventName].push(fn);
     };
-
-    off(eventName, fn) {
-        if(!this.address[eventName]) {
-            return;
-        }
-        this.address[eventName].filter(eventFn => fn !== eventFn);
-    };
+    off (adr) {
+        this.address[adr] = null
+    }
 }
 
 

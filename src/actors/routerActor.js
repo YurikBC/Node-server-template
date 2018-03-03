@@ -3,25 +3,36 @@ import Actor from '../Actor'
 
 const findRouteData = routes => {
     return routes.filter((route) => {
-        return window.location.hash === route.adress
+        return window.location.hash.replace('#', '') === route.address
     })
 };
+
+const onHashChange = Symbol('onHashChange');
+let oldRoute
 
 let routerActor = {
     name: 'routerActor',
     init () {
-        window.addEventListener('hashchange', this.paintEvent)
-        this.paintEvent ()
+        window.addEventListener('hashchange', this[onHashChange]);
+        oldRoute = routes[0];
+        this[onHashChange]();
         return {}
     },
     go (state, route) {
-        window.location.hash = route.adress
+        window.location.hash = route.address;
     },
-    paintEvent () {
+    [onHashChange] () {
         let currentRoute = findRouteData(routes);
-        !currentRoute.length
-            ? Actor.send('renderActor', ['paint', [routes[0]]])
-            : Actor.send('renderActor', ['paint', [currentRoute[0]]])
+        let newRoute = !currentRoute.length ? routes[0] : currentRoute[0];
+
+        Actor.send('renderActor', ['paint', newRoute]);
+        Actor.start(newRoute.controller);
+
+        if (newRoute.name !== oldRoute.name) {
+            Actor.end(oldRoute.name)
+        }
+
+        oldRoute = newRoute
     }
 };
 
