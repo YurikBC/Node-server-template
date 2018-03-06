@@ -1,49 +1,48 @@
 const express = require('express');
-const webpack = require("webpack");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const livereload = require('livereload');
 const path = require('path');
 const app = express();
-
-// webpack run
-const compiler = webpack({
-    entry: path.join(__dirname, "/src/main.js"),
-    output: {
-        path: path.join(__dirname, "/public"),
-        filename: 'app.js'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.html$/,
-                use: 'raw-loader'
-            }
-        ]
-    },
-    plugins: [
-        new CopyWebpackPlugin([
-            {from: './*.html', to: path.join(__dirname, "/public")},
-            {from: path.join(__dirname, "/src/styles.css"), to: path.join(__dirname, "/public")}
-        ])
-    ]
-});
-
-// watch
-compiler.watch({
-    watch: true,
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-    }
-}, () => {});
-
-compiler.run(() => {});
+const logger = require('morgan');
+const webpack = require('./webpack.config');
+const database = require('./database.config');
+const bodyParser = require('body-parser');
+const knex = require('knex');
+const ind = require('./migrations/index')
+// webpack config
+webpack.config();
 
 // server run
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static('public'));
-app.use(function response(req, res) {
+// Send files to the browser
+
+
+// app.get('/api/get_user', async (req, res) => {
+//     let client = database.client
+//     client.connect(function (err) {
+//         client.query('SELECT * FROM weather;', function (err, result) {
+//             res.send(result)
+//         });
+//     });
+// });
+//
+// app.post('/api/set_user', function (req, res) {
+//     let email = req.body.email
+//     let password = req.body.password
+//     let client = database.client
+//     client.connect(function (err) {
+//         // client.query('INSERT * FROM weather;', function (err, result) {
+//         //     res.send(result)
+//         // });
+//     });
+// })
+
+app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, '/index.html'))
-})
+});
 
 
 // hot reloader

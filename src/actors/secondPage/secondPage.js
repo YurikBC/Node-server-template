@@ -1,3 +1,5 @@
+import Actor from '../../Actor'
+
 let state = {}
 
 let secondPageActor = {
@@ -6,7 +8,7 @@ let secondPageActor = {
         state.form = document.querySelector('[data-item="form"]')
         state.formValue = document.querySelector('[data-item="formValue"]')
         state.form.addEventListener('input', () => {
-            this.validateForm()
+            Actor.send(this.name, ['validateForm'])
         })
     },
     validateForm () {

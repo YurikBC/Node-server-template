@@ -1,9 +1,9 @@
 let renderActor = {
     name: 'renderActor',
     init () {
-        let state = {}
-        state.mainEl = document.getElementById('a-app')
-        return state
+        return {
+            mainEl: document.getElementById('a-app')
+        }
     },
     paint (state, currentRoute) {
         if (state.mainEl) {

@@ -1,5 +1,6 @@
 import routes from '../../src/router/routerConfig';
 import Actor from '../Actor'
+import ActorFactory from '../ActorFactory'
 
 const findRouteData = routes => {
     return routes.filter((route) => {
@@ -8,31 +9,34 @@ const findRouteData = routes => {
 };
 
 const onHashChange = Symbol('onHashChange');
-let oldRoute
+let oldPage;
+let actors = {};
 
 let routerActor = {
     name: 'routerActor',
     init () {
         window.addEventListener('hashchange', this[onHashChange]);
-        oldRoute = routes[0];
+        oldPage = routes[0];
         this[onHashChange]();
         return {}
     },
-    go (state, route) {
+    go (_, route) {
         window.location.hash = route.address;
     },
     [onHashChange] () {
-        let currentRoute = findRouteData(routes);
-        let newRoute = !currentRoute.length ? routes[0] : currentRoute[0];
+        let foundedRoute = findRouteData(routes);
+        let newPage = !foundedRoute.length ? routes[0] : foundedRoute[0];
 
-        Actor.send('renderActor', ['paint', newRoute]);
-        Actor.start(newRoute.controller);
+        Actor.send('renderActor', ['paint', newPage]);
 
-        if (newRoute.name !== oldRoute.name) {
-            Actor.end(oldRoute.name)
+        actors[newPage.controller.name] = new ActorFactory();
+        actors[newPage.controller.name].create(newPage.controller.name);
+
+        if (newPage.name !== oldPage.name && actors[oldPage.name]) {
+            actors[oldPage.name].remove(oldPage.name)
         }
 
-        oldRoute = newRoute
+        oldPage = newPage
     }
 };
 

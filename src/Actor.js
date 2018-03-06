@@ -1,14 +1,13 @@
-import EventEmitter from './EventEmitter';
-
+import EventEmitter from './utils/EventEmitter';
 const eventEmitter = new EventEmitter();
 
-let actoraddresses = {}
+let actorAddresses = {}
 
 
 function getAddress (target) {
     let address = target
     if (typeof target === 'string') {
-        address = actoraddresses[target]
+        address = actorAddresses[target]
     }
     return address
 }
@@ -22,7 +21,7 @@ const Actor = {
             state = behavior[method](state, message) || state;
         });
 
-        actoraddresses[behavior.name] = address;
+        actorAddresses[behavior.name] = address;
 
         return address;
     },
