@@ -2,12 +2,6 @@ body {
     background-color: white;
 }
 
-div[data-item="button"] {
-    background-color: goldenrod;
-    padding: 3px 10px;
-    display: inline;
-}
-
 .app {
     display: flex;
 }
@@ -18,3 +12,13 @@ div[data-item="button"] {
     color: white;
     cursor: pointer;
 }
+div[data-item="button"] {
+    background-color: goldenrod;
+    padding: 3px 10px;
+    display: inline;
+    cursor: pointer;
+}
+input {
+    margin-bottom: 10px;
+}
+

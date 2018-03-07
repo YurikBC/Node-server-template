@@ -3,7 +3,8 @@ let address = {};
 class EventEmitter {
     emit (eventName, data) {
         ( address[eventName] || [] ).forEach(fn => {
-            fn.call(null, data);
+            fn(data)
+            console.log(fn)
         });
     };
 

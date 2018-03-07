@@ -1,6 +1,11 @@
 import routes from '../../src/router/routerConfig';
 import Actor from '../Actor'
 import ActorFactory from '../ActorFactory'
+import constants from '../constants'
+
+const {
+    USER_ACTOR
+} = constants
 
 const findRouteData = routes => {
     return routes.filter((route) => {
@@ -9,14 +14,12 @@ const findRouteData = routes => {
 };
 
 const onHashChange = Symbol('onHashChange');
-let oldPage;
 let actors = {};
 
 let routerActor = {
     name: 'routerActor',
     init () {
         window.addEventListener('hashchange', this[onHashChange]);
-        oldPage = routes[0];
         this[onHashChange]();
         return {}
     },
@@ -27,17 +30,17 @@ let routerActor = {
         let foundedRoute = findRouteData(routes);
         let newPage = !foundedRoute.length ? routes[0] : foundedRoute[0];
 
-        Actor.send('renderActor', ['paint', newPage]);
+        Actor.send(USER_ACTOR, ['checkToken'])
+        let token = true
+        if (!token) {  window.location.hash = routes[0].address; }
+        if (token || newPage.name === 'Login') {
+            Actor.send('renderActor', ['paint', newPage]);
 
-        actors[newPage.controller.name] = new ActorFactory();
-        actors[newPage.controller.name].create(newPage.controller.name);
-
-        if (newPage.name !== oldPage.name && actors[oldPage.name]) {
-            actors[oldPage.name].remove(oldPage.name)
+            let factory = new ActorFactory();
+            factory.create(newPage.controller.name)
         }
-
-        oldPage = newPage
     }
 };
+
 
 export default routerActor

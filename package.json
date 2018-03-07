@@ -13,6 +13,7 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "connect-mongo": "^2.0.1",
+    "crypto": "^1.0.1",
     "dot": "^1.1.2",
     "dotenv": "^5.0.1",
     "ejs": "^2.5.7",
