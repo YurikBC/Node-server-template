@@ -14,11 +14,13 @@ const {
     REGISTRATION,
     SECOND_PAGE,
     THIRD_PAGE,
+    MAIN_PAGE,
 
     LOGIN_URL,
     REGISTRATION_URL,
     SECOND_PAGE_URL,
-    THIRD_PAGE_URL
+    THIRD_PAGE_URL,
+    MAIN_PAGE_URL
 } = constants
 
 
@@ -27,25 +29,36 @@ const routes = [
         name: LOGIN,
         address: LOGIN_URL,
         template: loginPage,
-        controller: loginPageActor
+        controller: loginPageActor,
+        tokenRequired: false
     },
     {
         name: REGISTRATION,
         address: REGISTRATION_URL,
         template: regPage,
-        controller: regPageActor
+        controller: regPageActor,
+        tokenRequired: false
+    },
+    {
+        name: MAIN_PAGE,
+        address: MAIN_PAGE_URL,
+        template: templateSecond,
+        controller: secondPageActor,
+        tokenRequired: true
     },
     {
         name: SECOND_PAGE,
         address: SECOND_PAGE_URL,
         template: templateSecond,
-        controller: secondPageActor
+        controller: secondPageActor,
+        tokenRequired: true
     },
     {
         name: THIRD_PAGE,
         address: THIRD_PAGE_URL,
         template: templateThird,
-        controller: thirdPageActor
+        controller: thirdPageActor,
+        tokenRequired: false
     }
 ]
 

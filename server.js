@@ -23,6 +23,7 @@ app.use(require('./routesHandler').req)
 // hot reloader
 var server = livereload.createServer({});
 server.watch(__dirname + "/public");
+server.watch(__dirname + "/routesHandler.js");
 
 // listen to the server
 app.listen(3000, () => {

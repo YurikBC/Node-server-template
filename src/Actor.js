@@ -19,7 +19,7 @@ const Actor = {
 
         eventEmitter.on(address, function([method, message]) {
             state = behavior[method](state, message) || state;
-            console.log(state)
+            return state
         });
 
         actorAddresses[behavior.name] = address;
@@ -28,7 +28,7 @@ const Actor = {
     },
 
     send (target, message) {
-        eventEmitter.emit(getAddress(target), message);
+        return eventEmitter.emit(getAddress(target), message);
     },
 
     end (target) {

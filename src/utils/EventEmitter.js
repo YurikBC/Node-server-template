@@ -2,10 +2,11 @@ let address = {};
 
 class EventEmitter {
     emit (eventName, data) {
+        let result
         ( address[eventName] || [] ).forEach(fn => {
-            fn(data)
-            console.log(fn)
+            result = fn(data)
         });
+        return result
     };
 
     on (eventName, fn) {

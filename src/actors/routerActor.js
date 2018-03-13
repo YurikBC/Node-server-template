@@ -4,20 +4,32 @@ import ActorFactory from '../ActorFactory'
 import constants from '../constants'
 
 const {
-    USER_ACTOR
+    USER_ACTOR,
+    ROUTER_ACTOR
 } = constants
+
+const onHashChange = Symbol('onHashChange');
 
 const findRouteData = routes => {
     return routes.filter((route) => {
-        return window.location.hash.replace('#', '') === route.address
+        return window.location.hash.replace('#', '') == route.address
     })
 };
 
-const onHashChange = Symbol('onHashChange');
-let actors = {};
+const checkForUserRights = (routeObj) => {
+    let tokenObj = Actor.send(USER_ACTOR, ['checkToken'])
+    let token = tokenObj.token
+
+    if (!routeObj.tokenRequired) {
+        return true
+    } else if (routeObj.tokenRequired && token) {
+        return true
+    }
+    return  false
+}
 
 let routerActor = {
-    name: 'routerActor',
+    name: ROUTER_ACTOR,
     init () {
         window.addEventListener('hashchange', this[onHashChange]);
         this[onHashChange]();
@@ -28,16 +40,15 @@ let routerActor = {
     },
     [onHashChange] () {
         let foundedRoute = findRouteData(routes);
-        let newPage = !foundedRoute.length ? routes[0] : foundedRoute[0];
+        let pageToReach = !foundedRoute.length ? routes[0] : foundedRoute[0];
+        let isPageReachable = checkForUserRights(pageToReach)
 
-        Actor.send(USER_ACTOR, ['checkToken'])
-        let token = true
-        if (!token) {  window.location.hash = routes[0].address; }
-        if (token || newPage.name === 'Login') {
-            Actor.send('renderActor', ['paint', newPage]);
-
+        if (isPageReachable) {
+            Actor.send('renderActor', ['paint', pageToReach]);
             let factory = new ActorFactory();
-            factory.create(newPage.controller.name)
+            factory.create(pageToReach.controller.name)
+        } else {
+            window.location.hash = routes[0].address;
         }
     }
 };

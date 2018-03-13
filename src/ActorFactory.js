@@ -7,13 +7,13 @@ ActorFactory.prototype = {
     constructor: ActorFactory,
     create (type) {
         if (actorList[type]) {
-            let actorName = actorList[type];
-            return Actor.start(actorName);
+            let actorObj = actorList[type];
+            return Actor.start(actorObj);
         }
     },
     remove (type) {
-        let actorName = actorList[type].name;
-        return Actor.end(actorName);
+        let actorObj = actorList[type].name;
+        return Actor.end(actorObj);
     }
 }
 

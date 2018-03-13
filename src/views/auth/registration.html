@@ -1,8 +1,89 @@
-<div>
-    <h3>Registration page</h3>
-    <div>
-        <input data-item="form__email" type="email">
-        <input data-item="form__password" type="password">
+<div class="row justify-content-center">
+    <div class="col-md-4 registration-block">
+        <div class="row justify-content-center">
+            <h2>Registration</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input
+                            data-item="form__firstName"
+                            id="firstName"
+                            type="text"
+                            class="form-control"
+                            required
+                            placeholder="Enter first name">
+                    <div class="invalid-feedback">
+                        Please provide a valid name.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="secondName">Second Name</label>
+                    <input id="secondName"
+                           data-item="form__secondName"
+                           type="text"
+                           class="form-control"
+                           required
+                           placeholder="Enter second name">
+                    <div class="invalid-feedback">
+                        Please provide a valid name.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class=" form-group col-md-12">
+                <label for="exampleInputEmail1">Email address</label>
+                <input data-item="form__email"
+                       type="email"
+                       class="form-control"
+                       id="exampleInputEmail1"
+                       aria-describedby="emailHelp"
+                       required
+                       placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input data-item="form__password"
+                           type="password"
+                           class="form-control"
+                           id="password"
+                           required
+                           placeholder="Enter password">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="repeatPassword">Repeat password</label>
+                    <input data-item="form__repeat-password"
+                           type="password"
+                           class="form-control"
+                           id="repeatPassword"
+                           required
+                           placeholder="Repeat password">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button data-item="button__submit"
+                    type="submit"
+                    class="btn btn-primary">Submit
+            </button>
+        </div>
     </div>
-    <div data-item="button">Submit</div>
+</div>
+<div class="row col-md-12 justify-content-center">
+    <div class="alert"
+         data-item="message-alert"
+         role="alert"
+         style="margin-top: 20px; display: none;">
+        You have been registred!
+    </div>
 </div>

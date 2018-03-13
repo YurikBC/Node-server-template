@@ -7,16 +7,16 @@ const {
 let userActor = {
     name: USER_ACTOR,
     init () {
-        return {}
+        return {
+            token: null
+        }
     },
     checkToken (state) {
-        let string = 'fvjdfvnjdfnvjkdfvkjd'
-        return string
+        state.token = window.sessionStorage.getItem(TOKEN_NAME_IN_STORAGE);
+        return state
     },
-    checkTokens (state) {
-        alert('f')
-        let x = Promise((resolve))
-        x.resolve('fdvdfvdf')
+    setToken (state, token) {
+        sessionStorage.setItem('token', token)
     }
 }
 

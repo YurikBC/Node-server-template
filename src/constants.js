@@ -3,6 +3,7 @@ const ROUTER_ACTOR = 'routerActor';
 const RENDER_ACTOR = 'renderActor';
 const USER_ACTOR = 'userActor';
 const SERVER_ACTOR = 'serverActor';
+const REGISTRATION_ACTOR = 'regPageActor'
 const FIRST_PAGE_ACTOR = 'firstPageActor';
 const SECOND_PAGE_ACTOR = 'secondPageActor';
 const THIRD_PAGE_ACTOR = 'thirdPageActor';
@@ -13,6 +14,10 @@ const LOGIN_URL = 'login';
 
 const REGISTRATION = 'Registration';
 const REGISTRATION_URL = 'registration';
+
+
+const MAIN_PAGE = 'main';
+const MAIN_PAGE_URL = '/';
 
 const SECOND_PAGE = 'SecondPage';
 const SECOND_PAGE_URL = 2;
@@ -30,16 +35,19 @@ export default {
     FIRST_PAGE_ACTOR,
     SECOND_PAGE_ACTOR,
     THIRD_PAGE_ACTOR,
+    REGISTRATION_ACTOR,
 
     LOGIN,
     REGISTRATION,
     SECOND_PAGE,
     THIRD_PAGE,
+    MAIN_PAGE,
 
     LOGIN_URL,
     REGISTRATION_URL,
     SECOND_PAGE_URL,
     THIRD_PAGE_URL,
+    MAIN_PAGE_URL,
 
     TOKEN_NAME_IN_STORAGE
 }

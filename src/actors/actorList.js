@@ -2,6 +2,7 @@ import routerActor from './routerActor';
 import renderActor from './renderActor';
 import userActor from './auth/userActor';
 import serverActor from './serverActor';
+import regPage from './auth/registrationPage'
 import firstPageActor from './auth/loginPage';
 import secondPageActor from './secondPage/secondPage';
 import thirdPageActor from './thirdPage/thirdPage'
@@ -14,7 +15,8 @@ const {
     SERVER_ACTOR,
     FIRST_PAGE_ACTOR,
     SECOND_PAGE_ACTOR,
-    THIRD_PAGE_ACTOR
+    THIRD_PAGE_ACTOR,
+    REGISTRATION_ACTOR
 } = constants
 
 const actorList = {
@@ -24,7 +26,8 @@ const actorList = {
     [SERVER_ACTOR]: serverActor,
     [FIRST_PAGE_ACTOR]: firstPageActor,
     [SECOND_PAGE_ACTOR]: secondPageActor,
-    [THIRD_PAGE_ACTOR]: thirdPageActor
+    [THIRD_PAGE_ACTOR]: thirdPageActor,
+    [REGISTRATION_ACTOR]: regPage
 }
 
 export default actorList

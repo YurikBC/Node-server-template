@@ -6,6 +6,11 @@ const attempt = (fn, ...args) => {
     }
 };
 
+const getElementByItem = (item) => {
+    return document.querySelector(`[data-item=${item}]`)
+};
+
 export default {
-    attempt
+    attempt,
+    getElementByItem
 }
