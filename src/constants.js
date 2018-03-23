@@ -4,6 +4,7 @@ const RENDER_ACTOR = 'renderActor';
 const USER_ACTOR = 'userActor';
 const SERVER_ACTOR = 'serverActor';
 const REGISTRATION_ACTOR = 'regPageActor'
+const LOGIN_ACTOR = 'loginPageActor'
 const FIRST_PAGE_ACTOR = 'firstPageActor';
 const SECOND_PAGE_ACTOR = 'secondPageActor';
 const THIRD_PAGE_ACTOR = 'thirdPageActor';
@@ -36,6 +37,7 @@ export default {
     SECOND_PAGE_ACTOR,
     THIRD_PAGE_ACTOR,
     REGISTRATION_ACTOR,
+    LOGIN_ACTOR,
 
     LOGIN,
     REGISTRATION,

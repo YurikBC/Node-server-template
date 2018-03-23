@@ -12,16 +12,46 @@ function generateToken () {
 // Login
 app.route('/api/user')
     .get(function (req, res) {
-        knex.select().from('users').where('id', '1').then(function (users) {
-            res.send(users)
-        });
+        knex('users').select().where({
+            id: req.headers.clientid,
+            token: req.headers.token
+        }).then((user) => {
+            if (user.length) {
+                res.status(200);
+                res.send('Success');
+            } else {
+                res.status(401);
+                res.send('User not found')
+            }
+        }).catch((error) => {
+            res.status(401);
+            res.send('User not found')
+        })
     })
     .post(function (req, res) {
-        knex('users').where({
-            email: req.body.email
-        }).then((user) => {
-            console.log(user)
-            res.send(user)
+        let token;
+        let email = req.body.email
+        knex('users').where(
+          knex.raw('LOWER("email") = ?', email)
+        ).then((user) => {
+            // we check if password is valid and then update token
+            if (user[0].password.toString() === req.body.password.toString()) {
+                token = generateToken();
+                knex('users').where('id', user[0].id).update({token: token}).then(() => {
+                    knex('users').select().where('id', user[0].id).then((user) => {
+                        let obj = {...user[0]}
+                        delete obj.password
+                        res.status(200);
+                        res.send(obj)
+                    })
+                })
+            } else {
+                res.status(401);
+                res.send('Wrong password');
+            }
+        }).catch((error) => {
+            res.status(401);
+            res.send('User does not exists');
         })
     })
 

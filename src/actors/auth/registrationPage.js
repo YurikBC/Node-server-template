@@ -26,8 +26,6 @@ const getFormData = (state) => {
         `&email=${value.email}` +
         `&password=${value.password}`;
     return params
-
-
 }
 
 function validateForm (value) {
@@ -74,16 +72,17 @@ let regPageActor = {
         return state
     },
     submit (state) {
+        let url = '/api/auth';
         let isValid = validateForms(state);
         let messageEl = getElementByItem("message-alert");
         messageEl.classList.remove('alert-danger')
 
-        // if (isValid) {
+        if (isValid) {
             let value = getFormData(state);
-            Actor.send(SERVER_ACTOR, ['post', value]).then((response) => {
+            Actor.send(SERVER_ACTOR, ['post', [url, value]]).then((response) => {
                 let res = JSON.parse(response);
 
-                Actor.send(USER_ACTOR, ['setToken', res.token])
+                Actor.send(USER_ACTOR, ['setUser', res.token])
 
                 messageEl.classList.add('alert-success');
                 messageEl.style.display = 'block';
@@ -95,7 +94,7 @@ let regPageActor = {
                 messageEl.innerText = response
                 messageEl.style.display = 'block';
             })
-        // }
+        }
     }
 };
 

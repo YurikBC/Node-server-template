@@ -15,8 +15,11 @@ let userActor = {
         state.token = window.sessionStorage.getItem(TOKEN_NAME_IN_STORAGE);
         return state
     },
-    setToken (state, token) {
-        sessionStorage.setItem('token', token)
+    setUser (state, user) {
+        state = {...state, ...user}
+        if (state.token) {
+          sessionStorage.setItem(TOKEN_NAME_IN_STORAGE, state.token)
+        }
     }
 }
 

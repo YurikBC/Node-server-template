@@ -1,15 +1,17 @@
 import Actor from '../../Actor'
+import methods from '../../utils/_methods'
+
+const {
+    getElementByItem
+} = methods;
 
 let state = {}
 
 let secondPageActor = {
     name: 'secondPageActor',
     init () {
-        state.form = document.querySelector('[data-item="form"]')
-        state.formValue = document.querySelector('[data-item="formValue"]')
-        state.form.addEventListener('input', () => {
-            Actor.send(this.name, ['validateForm'])
-        })
+      let el = getElementByItem("container")
+      console.log(el)
     },
     validateForm () {
         state.formValue.innerText = state.form.value

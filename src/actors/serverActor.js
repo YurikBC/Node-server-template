@@ -10,10 +10,9 @@ let serverActor = {
     init () {
         return {}
     },
-    post (state, value) {
+    post (state, [url, params]) {
         let http = new XMLHttpRequest();
-        let params = value
-        http.open('POST', '/api/auth', true);
+        http.open('POST', url, true);
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         http.send(params);
         let promise = new Promise ((resolve, reject) => {
@@ -22,7 +21,10 @@ let serverActor = {
             }
         })
         return promise
-    }
+    },
+  get () {
+
+  }
 
 }
 export default serverActor
