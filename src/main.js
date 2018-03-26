@@ -2,6 +2,8 @@ import Actor from './Actor';
 import routes from './router/routerConfig'
 import ActorFactory from './ActorFactory'
 import methods from './utils/_methods'
+import './assets/styles/styles.scss'
+
 
 const {
   getElementByItem
