@@ -4,7 +4,7 @@ import userActor from './auth/userActor';
 import serverActor from './serverActor';
 import regPage from './auth/registrationPage'
 import loginPageActor from './auth/loginPage';
-import secondPageActor from './secondPage/secondPage';
+import mainPageActor from './mainPage/mainPageActor';
 import thirdPageActor from './thirdPage/thirdPage'
 import constants from '../constants'
 
@@ -25,7 +25,7 @@ const actorList = {
     [USER_ACTOR]: userActor,
     [SERVER_ACTOR]: serverActor,
     [LOGIN_ACTOR]: loginPageActor,
-    [SECOND_PAGE_ACTOR]: secondPageActor,
+    [SECOND_PAGE_ACTOR]: mainPageActor,
     [THIRD_PAGE_ACTOR]: thirdPageActor,
     [REGISTRATION_ACTOR]: regPage,
     [REGISTRATION_ACTOR]: regPage

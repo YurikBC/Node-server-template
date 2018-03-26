@@ -21,10 +21,6 @@ let serverActor = {
             }
         })
         return promise
-    },
-  get () {
-
-  }
-
+    }
 }
 export default serverActor

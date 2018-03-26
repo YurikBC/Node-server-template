@@ -12,12 +12,15 @@ const onHashChange = Symbol('onHashChange');
 
 const findRouteData = routes => {
     return routes.filter((route) => {
+        if (!window.location.hash ) {
+          return route.address === '/'
+        }
         return window.location.hash.replace('#', '') == route.address
     })
 };
 
 const checkForUserRights = (routeObj) => {
-    let tokenObj = Actor.send(USER_ACTOR, ['checkToken'])
+    let tokenObj = Actor.send(USER_ACTOR, ['get', 'token'])
     let token = tokenObj.token
 
     if (!routeObj.tokenRequired) {

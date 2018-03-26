@@ -1,11 +1,11 @@
 import loginPage from '../views/auth/login.html'
 import regPage from '../views/auth/registration.html'
-import templateSecond from '../views/secondPageTemplate.html';
+import mainPageTemplate from '../views/mainPage.html';
 import templateThird from '../views/thirdPageTemplate.html';
 
 import loginPageActor from '../actors/auth/loginPage'
 import regPageActor from '../actors/auth/registrationPage'
-import secondPageActor from '../actors/secondPage/secondPage'
+import mainPageActor from '../actors/mainPage/mainPageActor'
 import thirdPageActor from '../actors/thirdPage/thirdPage'
 
 import constants from '../constants'
@@ -42,15 +42,15 @@ const routes = [
     {
         name: MAIN_PAGE,
         address: MAIN_PAGE_URL,
-        template: templateSecond,
-        controller: secondPageActor,
+        template: mainPageTemplate,
+        controller: mainPageActor,
         tokenRequired: true
     },
     {
         name: SECOND_PAGE,
         address: SECOND_PAGE_URL,
-        template: templateSecond,
-        controller: secondPageActor,
+        template: templateThird,
+        controller: mainPageActor,
         tokenRequired: true
     },
     {

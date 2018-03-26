@@ -5,7 +5,7 @@ const app = express();
 const logger = require('morgan');
 const webpack = require('./webpack.config');
 const bodyParser = require('body-parser');
-
+const server = livereload.createServer({});
 // webpack config
 webpack.config();
 
@@ -18,12 +18,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 // Route Handler upload
-app.use(require('./routesHandler').req)
+app.use(require('./routesController').req);
 
 // hot reloader
-var server = livereload.createServer({});
-console.log(__dirname + "/routesHandler.js")
-server.watch([__dirname + "/public", __dirname + "routesHandler.js"]);
+
+server.watch(__dirname + "/public");
 
 // listen to the server
 app.listen(3000, () => {

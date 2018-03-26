@@ -29,12 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
   activateNavigation()
 });
 
-window.onbeforeunload = () => {
+window.addEventListener("onclose",  () => {
   factory.remove(SERVER_ACTOR);
   factory.remove(USER_ACTOR);
   factory.remove(RENDER_ACTOR);
   factory.remove(ROUTER_ACTOR);
-};
+});
+
 
 function activateNavigation () {
   getElementByItem('home-link').href = '#' + MAIN_PAGE_URL;

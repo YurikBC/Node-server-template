@@ -1,13 +1,15 @@
 const webpack = require("webpack");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 
 // webpack run
+const publicPath = path.join(__dirname, "/public")
 function config () {
     const compiler = webpack({
         entry: path.join(__dirname, "/src/main.js"),
         output: {
-            path: path.join(__dirname, "/public"),
+            path: publicPath,
             filename: 'app.js'
         },
         module: {
@@ -20,9 +22,10 @@ function config () {
         },
         plugins: [
             new CopyWebpackPlugin([
-                {from: './*.html', to: path.join(__dirname, "/public")},
-                {from: path.join(__dirname, "/src/styles.css"), to: path.join(__dirname, "/public")}
-            ])
+                {from: './*.html', to: publicPath},
+                {from: '**/assets/*.css', to: publicPath}
+            ]),
+          new CleanWebpackPlugin(['public']),
         ]
     });
 
